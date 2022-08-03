@@ -9,7 +9,7 @@
     "offline search",
     "full text search"
   ],
-  "homepage": "https://github.com/robertIsaac/elasticlunr.js",
+  "homepage": "http://weixsong.github.io",
   "bugs": "https://github.com/robertIsaac/elasticlunr.js/issues",
   "main": "elasticlunr.js",
   "license": "MIT",
@@ -20,7 +20,7 @@
   "devDependencies": {
     "doxx": "1.4.0",
     "phantomjs": "1.9.8",
-    "uglify-js": "2.4.13"
+    "uglify-js": "3.16.3"
   },
   "scripts": {
     "test": "make test"

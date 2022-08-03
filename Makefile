@@ -20,8 +20,6 @@ SERVER_PORT ?= 3000
 TEST_PORT ?= 32423
 
 DOXX ?= ./node_modules/.bin/doxx
-NODE ?= /usr/bin/node
-NPM ?= /usr/bin/npm
 PHANTOMJS ?= ./node_modules/.bin/phantomjs
 UGLIFYJS ?= ./node_modules/.bin/uglifyjs
 
@@ -71,9 +69,9 @@ reset:
 	git checkout elasticlunr.* *.json docs/index.html example/example_index.json
 
 example: elasticlunr.min.js
-	${NODE} example/index_builder.js
+	node example/index_builder.js
 
 node_modules: package.json
-	${NPM} -s install
+	npm -s install
 
 .PHONY: test clean docs reset example

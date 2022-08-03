@@ -1,9 +1,9 @@
 /**
  * elasticlunr - http://weixsong.github.io
- * Lightweight full-text search engine in Javascript for browser search and offline search. - 0.9.5
+ * Lightweight full-text search engine in Javascript for browser search and offline search. - 0.9.6
  *
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  * MIT Licensed
  * @license
  */
@@ -12,8 +12,8 @@
 
 /*!
  * elasticlunr.js
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -83,7 +83,7 @@ var elasticlunr = function (config) {
   return idx;
 };
 
-elasticlunr.version = "0.9.5";
+elasticlunr.version = "0.9.6";
 
 // only used this to make elasticlunr.js compatible with lunr-languages
 // this is a trick to define a global alias of elasticlunr
@@ -91,8 +91,8 @@ lunr = elasticlunr;
 
 /*!
  * elasticlunr.utils
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -134,8 +134,8 @@ elasticlunr.utils.toString = function (obj) {
 };
 /*!
  * elasticlunr.EventEmitter
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -222,8 +222,8 @@ elasticlunr.EventEmitter.prototype.hasHandler = function (name) {
 };
 /*!
  * elasticlunr.tokenizer
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -308,8 +308,8 @@ elasticlunr.tokenizer.getSeperator = function() {
 }
 /*!
  * elasticlunr.Pipeline
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -563,8 +563,8 @@ elasticlunr.Pipeline.prototype.toJSON = function () {
 };
 /*!
  * elasticlunr.Index
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -1158,7 +1158,7 @@ elasticlunr.Index.prototype.use = function (plugin) {
 };
 /*!
  * elasticlunr.DocumentStore
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -1352,8 +1352,8 @@ function clone(obj) {
 }
 /*!
  * elasticlunr.stemmer
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
  */
 
@@ -1571,9 +1571,10 @@ elasticlunr.stemmer = (function(){
 elasticlunr.Pipeline.registerFunction(elasticlunr.stemmer, 'stemmer');
 /*!
  * elasticlunr.stopWordFilter
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
+
 
 /**
  * elasticlunr.stopWordFilter is an English language stop words filter, any words
@@ -1588,6 +1589,18 @@ elasticlunr.Pipeline.registerFunction(elasticlunr.stemmer, 'stemmer');
  * @return {String}
  * @see elasticlunr.Pipeline
  */
+elasticlunr.generateStopWordFilter = function (stopWords) {
+  var words = stopWords.reduce(function (memo, stopWord) {
+    memo[stopWord] = stopWord;
+    return memo;
+  }, {});
+
+  return function (token) {
+    if (token && words[token.toString()] !== token.toString()) return token;
+    return null;
+  };
+};
+
 elasticlunr.stopWordFilter = function (token) {
   if (token && elasticlunr.stopWordFilter.stopWords[token] !== true) {
     return token;
@@ -1608,7 +1621,7 @@ elasticlunr.clearStopWords = function () {
 /**
  * Add customized stop words
  * user could use this function to add customized stop words
- * 
+ *
  * @params {Array} words customized stop words
  * @return {null}
  */
@@ -1758,8 +1771,8 @@ elasticlunr.stopWordFilter.stopWords = elasticlunr.defaultStopWords;
 elasticlunr.Pipeline.registerFunction(elasticlunr.stopWordFilter, 'stopWordFilter');
 /*!
  * elasticlunr.trimmer
- * Copyright (C) 2016 Oliver Nightingale
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Oliver Nightingale
+ * Copyright (C) 2022 Wei Song
  */
 
 /**
@@ -1789,7 +1802,7 @@ elasticlunr.trimmer = function (token) {
 elasticlunr.Pipeline.registerFunction(elasticlunr.trimmer, 'trimmer');
 /*!
  * elasticlunr.InvertedIndex
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Wei Song
  * Includes code from - http://tartarus.org/~martin/PorterStemmer/js.txt
  */
 
@@ -2024,7 +2037,7 @@ elasticlunr.InvertedIndex.prototype.toJSON = function () {
 
 /*!
  * elasticlunr.Configuration
- * Copyright (C) 2016 Wei Song
+ * Copyright (C) 2022 Wei Song
  */
  
  /** 
@@ -2215,7 +2228,7 @@ elasticlunr.Configuration.prototype.reset = function () {
 
 /*!
  * lunr.SortedSet
- * Copyright (C) 2016 Oliver Nightingale
+ * Copyright (C) 2022 Oliver Nightingale
  */
 
 /**
