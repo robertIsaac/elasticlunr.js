@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width" charset="utf-8">
-    <title>elasticlunr</title>
+    <title>elasticlunrjs</title>
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
     <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/docs.css">
@@ -63,7 +63,7 @@
     </div>
     <header id="overview" class="jumbotron subhead">
       <div class="container">
-        <h1>elasticlunr</h1>
+        <h1>elasticlunrjs</h1>
         <p class="lead"></p>
       </div>
     </header>
@@ -88,7 +88,7 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#stopWordFilter"><i class="alert alert-info"></i><span>stopWordFilter</span></a>
+              <li><a href="#generateStopWordFilter"><i class="alert alert-info"></i><span>generateStopWordFilter</span></a>
               </li>
               <li><a href="#clearStopWords"><i class="alert alert-info"></i><span>clearStopWords</span></a>
               </li>
@@ -100,11 +100,11 @@
           </div>
         </div>
         <div class="span9">
-          <section id="stopWordFilter">
-            <h1>stopWordFilter</h1>
+          <section id="generateStopWordFilter">
+            <h1>generateStopWordFilter</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>elasticlunr.stopWordFilter()</span>
+              <div class="label label-info radius ctx-type">method</div><span>elasticlunr.generateStopWordFilter()</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -129,7 +129,19 @@
             </tbody>
           </table>
           <div class="description"><p>elasticlunr.stopWordFilter is an English language stop words filter, any words<br />contained in the stop word list will not be passed through the filter.</p><p>This is intended to be used in the Pipeline. If the token does not pass the<br />filter then undefined will be returned.<br />Currently this StopwordFilter using dictionary to do O(1) time complexity stop word filtering.</p> </div>
-          <pre><code class="language-javascript">elasticlunr.stopWordFilter = function (token) {
+          <pre><code class="language-javascript">elasticlunr.generateStopWordFilter = function (stopWords) {
+  var words = stopWords.reduce(function (memo, stopWord) {
+    memo[stopWord] = stopWord;
+    return memo;
+  }, {});
+
+  return function (token) {
+    if (token &amp;&amp; words[token.toString()] !== token.toString()) return token;
+    return null;
+  };
+};
+
+elasticlunr.stopWordFilter = function (token) {
   if (token &amp;&amp; elasticlunr.stopWordFilter.stopWords[token] !== true) {
     return token;
   }
