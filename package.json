@@ -1,7 +1,7 @@
 {
   "name": "elasticlunrjs",
   "description": "Lightweight full-text search engine in Javascript for browser search and offline search.",
-  "version": "0.9.7",
+  "version": "0.9.6",
   "author": "Wei Song",
   "keywords": [
     "search",
