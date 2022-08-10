@@ -1,6 +1,6 @@
 /**
  * elasticlunr - http://weixsong.github.io
- * Lightweight full-text search engine in Javascript for browser search and offline search. - 1.0.0
+ * Lightweight full-text search engine in Javascript for browser search and offline search. - 1.0.1
  *
  * Copyright (C) 2022 Oliver Nightingale
  * Copyright (C) 2022 Wei Song
@@ -22,7 +22,7 @@
  *
  * When using this convenience function a new index will be created with the
  * following functions already in the pipeline:
- * 
+ *
  * 1. elasticlunr.trimmer - trim non-word character
  * 2. elasticlunr.StopWordFilter - filters out any stop words before they enter the
  * index
@@ -35,29 +35,29 @@
  *       this.addField('id');
  *       this.addField('title');
  *       this.addField('body');
- *       
+ *
  *       //this.setRef('id'); // default ref is 'id'
  *
  *       this.pipeline.add(function () {
  *         // some custom pipeline function
  *       });
  *     });
- * 
+ *
  *    idx.addDoc({
- *      id: 1, 
+ *      id: 1,
  *      title: 'Oracle released database 12g',
  *      body: 'Yestaday, Oracle has released their latest database, named 12g, more robust. this product will increase Oracle profit.'
  *    });
- * 
+ *
  *    idx.addDoc({
- *      id: 2, 
+ *      id: 2,
  *      title: 'Oracle released annual profit report',
  *      body: 'Yestaday, Oracle has released their annual profit report of 2015, total profit is 12.5 Billion.'
  *    });
- * 
+ *
  *    # simple search
  *    idx.search('oracle database');
- * 
+ *
  *    # search with query-time boosting
  *    idx.search('oracle database', {fields: {title: {boost: 2}, body: {boost: 1}}});
  *
@@ -83,12 +83,11 @@ var elasticlunr = function (config) {
   return idx;
 };
 
-elasticlunr.version = "1.0.0";
+elasticlunr.version = "1.0.1";
 
 // only used this to make elasticlunr.js compatible with lunr-languages
 // this is a trick to define a global alias of elasticlunr
-lunr = elasticlunr;
-
+globalThis.lunr = elasticlunr;
 /*!
  * elasticlunr.utils
  * Copyright (C) 2022 Oliver Nightingale
@@ -106,9 +105,9 @@ elasticlunr.utils = {};
  * @param {String} message The message to be printed.
  * @memberOf Utils
  */
-elasticlunr.utils.warn = (function (global) {
+elasticlunr.utils.warn = (function () {
   return function (message) {
-    if (global.console && console.warn) {
+    if (globalThis.console && console.warn) {
       console.warn(message);
     }
   };
