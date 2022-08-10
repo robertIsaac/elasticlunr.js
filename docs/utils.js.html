@@ -131,9 +131,9 @@
             </tbody>
           </table>
           <div class="description"><p>Print a warning message to the console.</p> </div>
-          <pre><code class="language-javascript">elasticlunr.utils.warn = (function (global) {
+          <pre><code class="language-javascript">elasticlunr.utils.warn = (function () {
   return function (message) {
-    if (global.console &amp;&amp; console.warn) {
+    if (globalThis.console &amp;&amp; console.warn) {
       console.warn(message);
     }
   };
