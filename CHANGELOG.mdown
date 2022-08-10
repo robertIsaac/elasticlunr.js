@@ -1,5 +1,10 @@
 #
 
+## 1.0.1
+
+* fix declaring lunr alias.
+* fix console.warn.
+
 ## 1.0.0
 
 * add add elasticlunr.generateStopWordFilter.
